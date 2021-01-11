@@ -1,15 +1,8 @@
 ## Installation
 ```bash
-$ gem install linerb
 ```
 ## Usage
 ```ruby
-
-# Please read example.rb basically README is outdated
-
-# lib/example.rb
-
-# USE -W0 --jit
 
 require 'linerb'
 
@@ -37,15 +30,15 @@ class PollRecv
 
   def op_process(op)
     Async do
-      if op::type == J0_a_e_a_b_nd::RECEIVE_MESSAGE
-        if op::message::toType == J0_a_e_a_b_zc::BOT
+      if op::type == OpType::RECEIVE_MESSAGE
+        if op::message::toType == MIDType::BOT
           return
         end
         Client.talk.send(:api_sendMessage, text: "text", to: "mid/gid",
                          #Optional you dont need pass this args
-                         :contentType => J0_a_e_a_b_c9::NONE)
+                         :contentType => ContentType::NONE)
       end
-      if op::type == J0_a_e_a_b_nd::NOTIFIED_INVITE_INTO_CHAT
+      if op::type == OpType::NOTIFIED_INVITE_INTO_CHAT
         gid = op::param1
         Client.talk.send(:api_acceptChatInvitation, chatMid: gid)
         Client.talk.send(:api_sendMessage, text: "text", to: gid)
